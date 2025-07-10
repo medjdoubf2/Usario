@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo LocalStorage</title>
+    <style>
+        body {
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 20px;
+        }
+        h1 {
+           color: rgb(254, 68, 149);
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplo de LocalStorage</h1>
+    <script>
+        // Crear objeto usuario
+        const usuario = {
+            nombre: "fouad -medjdoub",
+            edad: 50,
+            email: "medjdoubf2@gmail.com"
+        };
+
+        // Convertir a JSON y guardar en localStorage
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+
+        // Recuperar datos de localStorage y convertir de nuevo a objeto
+        const usuarioRecuperado = JSON.parse(localStorage.getItem('usuario'));
+
+        // Imprimir en consola
+        console.log("Objeto original:", usuario);
+        console.log("Objeto recuperado:", usuarioRecuperado);
+
+        // Función para agregar tarea
+        function agregarTarea(tarea) {
+            let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            tareas.push(tarea);
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+        }
+
+        // Función para mostrar tareas
+        function mostrarTareas() {
+            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            console.log("Lista de tareas:");
+            tareas.forEach((tarea, index) => {
+                console.log(`${index + 1}: ${tarea}`);
+            });
+        }
+
+        // Agregar tareas
+        agregarTarea("Hacer la compra");
+        agregarTarea("Estudiar JavaScript");
+        agregarTarea("Ir al gimnasio");
+        agregarTarea("Ir a la playa con mis amigos");
+        // Mostrar tareas
+        mostrarTareas();
+    </script>
+</body>
+</html>
